@@ -10,15 +10,35 @@
 #include <errno.h>
 #include <string.h>
 #include <curl/curl.h>
-// ... //
-//	DONT PLEASE FORGET TO FREE STRING POINTER!!!!
-
-//for weather preparation 
 
 struct string {
 	  char *ptr;
 	    size_t len;
 };
+
+
+
+struct string s;
+
+char dir_list[ 256 ][ 256 ];
+int curr_dir_idx = -1;
+
+char files_list[ 256 ][ 256 ];
+int curr_file_idx = -1;
+
+char files_content[ 256 ][ 1024 ];
+int curr_file_content_idx = -1;
+
+time_t dir_time_access[256];//
+time_t dir_time_mod[256];
+
+
+time_t file_time_access[ 256];
+//int curr_file_time_access=-1;
+
+time_t file_time_mod[ 256];
+//int curr_file_time_mod = -1;
+
 
 void init_string(struct string *s) {
 	  s->len = 0;
@@ -29,9 +49,6 @@ void init_string(struct string *s) {
 			        }
 	        s->ptr[0] = '\0';
 }
-
-
-struct string s;
 
 
 size_t writefunc(void *ptr, size_t size, size_t nmemb, struct string *s)
@@ -80,26 +97,9 @@ void get_weather_string(const char * city)
 		  
 }
 
-char dir_list[ 256 ][ 256 ];
-int curr_dir_idx = -1;
-
-char files_list[ 256 ][ 256 ];
-int curr_file_idx = -1;
-
-char files_content[ 256 ][ 1024 ];
-int curr_file_content_idx = -1;
-
-time_t dir_time_access[256];//
-time_t dir_time_mod[256];
 
 
-time_t file_time_access[ 256];
-//int curr_file_time_access=-1;
 
-time_t file_time_mod[ 256];
-//int curr_file_time_mod = -1;
-
-//we need to implement one more string array for time_a and time_m  and implement correct wether representing into files 
 
 
 void add_dir( const char *dir_name )
